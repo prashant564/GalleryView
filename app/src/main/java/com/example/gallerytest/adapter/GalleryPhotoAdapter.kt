@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.gallerytest.R
 import kotlinx.android.synthetic.main.item_all_images_layout.view.*
 
@@ -25,7 +27,11 @@ class GalleryPhotoAdapter(var list: ArrayList<String>): RecyclerView.Adapter<Gal
 
     class GalleryImagesViewHolder private constructor(var view: View): RecyclerView.ViewHolder(view){
         fun bind(item: String){
-            view.iv_photo.setImageURI(Uri.parse("file://$item"))
+            Glide.with(view.context)
+                .load(Uri.parse("file://$item"))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .dontTransform()
+                .override(200,200).into(view.iv_photo)
         }
         companion object{
             fun from(parent: ViewGroup): GalleryImagesViewHolder {

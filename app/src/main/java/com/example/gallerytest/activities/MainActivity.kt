@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     @SuppressLint("InlinedApi")
     fun getImagePath(){
         val cursor: Cursor?
